@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+        // Mortgage company brand colors
+        brand: {
+          navy: '#0A2463',
+          gold: '#D4AF37',
+          lightBlue: '#E1F5FE',
+          darkBlue: '#0D47A1',
+          mediumBlue: '#1976D2',
+        }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
