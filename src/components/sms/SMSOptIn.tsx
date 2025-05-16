@@ -37,7 +37,7 @@ const SMSOptIn = () => {
       lastName: '',
       phoneNumber: '',
       loanNumber: '',
-      acceptTerms: false,
+      acceptTerms: false as any, // Using type assertion to fix the type error
     },
   });
 
