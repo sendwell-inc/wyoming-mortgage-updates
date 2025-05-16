@@ -1,0 +1,30 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Check out your repo
+      - uses: actions/checkout@v3
+
+      # 2) Set up Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3) Install dependencies & run your Lovable build
+      - run: npm ci
+      - run: npm run build
+
+      # 4) Deploy the built files in `public/` to the gh-pages branch
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
