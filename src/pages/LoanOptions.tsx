@@ -99,7 +99,7 @@ const LoanOptions = () => {
                       </div>
                       <div className="grid grid-cols-2 gap-2 border-b pb-2">
                         <span className="font-medium">PMI Required</span>
-                        <span>Yes, if down payment < 20%</span>
+                        <span>Yes, if down payment less than 20%</span>
                       </div>
                       <div className="grid grid-cols-2 gap-2 border-b pb-2">
                         <span className="font-medium">Max Loan Amount</span>
@@ -370,7 +370,7 @@ const LoanOptions = () => {
                   </tr>
                   <tr className="bg-white">
                     <td className="border p-3 font-medium">Mortgage Insurance</td>
-                    <td className="border p-3">PMI if <20% down</td>
+                    <td className="border p-3">PMI if less than 20% down</td>
                     <td className="border p-3">Required MIP</td>
                     <td className="border p-3">None</td>
                     <td className="border p-3">Guarantee fee</td>
