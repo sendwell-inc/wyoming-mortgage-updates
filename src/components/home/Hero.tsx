@@ -23,7 +23,7 @@ const Hero = () => {
             <Link to="/loan-options">
               <Button 
                 variant="outline" 
-                className="border-white text-white hover:bg-white/20 hover:border-white text-lg px-8 py-6 transition-all duration-300"
+                className="border-2 border-white text-white bg-brand-navy/50 hover:bg-white/20 hover:border-white text-lg px-8 py-6 transition-all duration-300"
               >
                 Explore Loan Options
               </Button>
