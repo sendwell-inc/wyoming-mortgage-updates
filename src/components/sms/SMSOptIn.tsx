@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
+import { MessageSquareText, Check } from 'lucide-react';
 
 const formSchema = z.object({
   firstName: z.string().min(1, { message: 'First name is required' }),
@@ -37,21 +38,20 @@ const SMSOptIn = () => {
       lastName: '',
       phoneNumber: '',
       loanNumber: '',
-      acceptTerms: false as any, // Using type assertion to fix the type error
+      acceptTerms: false as any,
     },
   });
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     
-    // Simulate API call
     try {
       console.log('SMS opt-in data:', data);
       
       // Simulate network delay
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      toast.success('You have successfully enrolled in SMS updates!', {
+      toast.success('Successfully enrolled in SMS updates!', {
         description: 'You will now receive text message updates about your mortgage application.',
       });
       
@@ -65,25 +65,34 @@ const SMSOptIn = () => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-lg">
-      <CardHeader className="bg-brand-navy text-white rounded-t-lg">
-        <CardTitle className="text-2xl">SMS Updates Enrollment</CardTitle>
-        <CardDescription className="text-gray-200">
-          Get text message updates about your mortgage application
+    <Card className="w-full max-w-md mx-auto rounded-xl overflow-hidden shadow-lg border-0 card-hover">
+      <CardHeader className="bg-gradient-to-r from-brand-navy to-brand-darkBlue text-white p-6">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="p-2 rounded-full bg-white/10 backdrop-blur-sm">
+            <MessageSquareText className="h-5 w-5" />
+          </div>
+          <CardTitle className="text-2xl font-semibold">SMS Updates</CardTitle>
+        </div>
+        <CardDescription className="text-gray-100 text-base">
+          Stay informed on your mortgage application status via text message
         </CardDescription>
       </CardHeader>
-      <CardContent className="pt-6">
+      <CardContent className="pt-6 px-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel className="text-gray-700 font-medium">First Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="John" {...field} />
+                      <Input 
+                        placeholder="John" 
+                        {...field} 
+                        className="border-gray-200 focus:border-brand-navy focus:ring-brand-navy/20" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -94,9 +103,13 @@ const SMSOptIn = () => {
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel className="text-gray-700 font-medium">Last Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Doe" {...field} />
+                      <Input 
+                        placeholder="Doe" 
+                        {...field} 
+                        className="border-gray-200 focus:border-brand-navy focus:ring-brand-navy/20" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -109,9 +122,14 @@ const SMSOptIn = () => {
               name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mobile Phone Number</FormLabel>
+                  <FormLabel className="text-gray-700 font-medium">Mobile Phone Number</FormLabel>
                   <FormControl>
-                    <Input placeholder="(307) 555-1234" type="tel" {...field} />
+                    <Input 
+                      placeholder="(307) 555-1234" 
+                      type="tel" 
+                      {...field} 
+                      className="border-gray-200 focus:border-brand-navy focus:ring-brand-navy/20" 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -123,11 +141,16 @@ const SMSOptIn = () => {
               name="loanNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    Loan Number <span className="text-xs text-gray-500">(if available)</span>
+                  <FormLabel className="flex items-center gap-2">
+                    <span className="text-gray-700 font-medium">Loan Number</span> 
+                    <span className="text-xs text-gray-500 font-normal">(if available)</span>
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Example: WY123456789" {...field} />
+                    <Input 
+                      placeholder="Example: WY123456789" 
+                      {...field} 
+                      className="border-gray-200 focus:border-brand-navy focus:ring-brand-navy/20" 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -138,15 +161,17 @@ const SMSOptIn = () => {
               control={form.control}
               name="acceptTerms"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-gray-100 bg-gray-50/50 p-4">
                   <FormControl>
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      className="data-[state=checked]:bg-brand-gold data-[state=checked]:border-brand-gold"
+                      icon={<Check className="h-4 w-4" />}
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>
+                    <FormLabel className="text-gray-700">
                       I agree to receive SMS text messages about my mortgage application
                     </FormLabel>
                     <FormMessage />
@@ -157,19 +182,18 @@ const SMSOptIn = () => {
                 </FormItem>
               )}
             />
-            
-            <CardFooter className="flex justify-end px-0 pt-2">
-              <Button 
-                type="submit" 
-                className="bg-brand-navy hover:bg-brand-darkBlue w-full"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Enrolling...' : 'Enroll in SMS Updates'}
-              </Button>
-            </CardFooter>
           </form>
         </Form>
       </CardContent>
+      <CardFooter className="flex justify-end px-6 pb-6 pt-2">
+        <Button 
+          onClick={form.handleSubmit(onSubmit)}
+          className="btn-primary w-full"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Enrolling...' : 'Enroll in SMS Updates'}
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
